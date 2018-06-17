@@ -18,12 +18,31 @@
     import SlideLeftTop from './SlideLeftTop'
     import SlideLeftMiddle from './SlideLeftMiddle'
 
+    import { TweenLite } from 'gsap'
+
+    import { bus } from '../../../main.js'
+
+
     export default {
         name: 'SlideLeft',
         components: {
             SlideLeftTop,
             SlideLeftMiddle
+        },
+        created() {
+            bus.$on('slideOpenL', () => {
+                openLeftSlide()
+            })
         }
+
+    }
+
+    const openLeftSlide = () => {
+        TweenLite.to(`.left-slider`, .5, {'left': 0})
+        TweenLite.fromTo(`.l-s-close img`, .5, {'margin': 0}, { 'margin': '20px 0' }).delay(2)
+        TweenLite.fromTo(`.l-s-close span`, 5, {'opacity': 0}, { 'opacity': 1 }).delay(2.5)
+        TweenLite.to(`.left-slider`, .5, {'height': '100%'}).delay(.7)
+        TweenLite.fromTo(`.left-slide-mid, .left-slide-top, .left-slide-bot`, .5, { opacity:0, 'visibility':'hidden' }, { opacity: 1, 'visibility':'visible' },.5  ).delay(1.5)
     }
 </script>
 

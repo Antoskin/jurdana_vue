@@ -1,7 +1,7 @@
 <template>
        <div class="left-slide-top">
                     <div class="slide-dots-back"></div>
-                    <div class="l-s-close">
+                    <div @click="closeLeftSlide" class="l-s-close">
                         <img class="m-c" width="15" src="@/assets/arow 1.svg" alt="">
                         <span class="m-c">CLOSE</span>
                         <img class="m-c" width="15" src="@/assets/arow 2.svg" alt="">
@@ -13,8 +13,20 @@
 <script>
     
     export default {
-        name: 'SlideLeftTop'
+        name: 'SlideLeftTop',
+        methods: {
+        	closeLeftSlide: () => {
+				closeLeftSlide()
+        	}
+        }
     }
+
+	const closeLeftSlide = () => {
+	    TweenLite.fromTo(`.left-slide-mid, .left-slide-top, .left-slide-bot`, .5, { opacity:1, 'visibility':'visible' }, { opacity: 0, 'visibility':'hidden' },.5  )
+	    TweenLite.to(`.left-slider`, .5, {'height': '60%'}).delay(.7)
+	    TweenLite.to(`.left-slider`, .5, {'left': '-95%'}).delay(1.5)
+	    TweenLite.to(`.l-s-close span`, .5, { 'opacity': 0 })
+	}
 
 </script>
 

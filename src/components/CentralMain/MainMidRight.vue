@@ -1,6 +1,6 @@
 <template>
           <div class="middle-sib middle-right">
-                        <div class="btn-wrap btn-right">
+                        <div @click="openSlideR" class="btn-wrap btn-right">
                             <p class="btn-text">CONTACT US</p>
                             <div class="dots">
                                 <span class="dot dot-three"></span>
@@ -12,8 +12,16 @@
 </template>
 
 <script>
+
+    import {bus} from '../../main.js'
+
     export default {
-        name: 'MainMidRight'
+        name: 'MainMidRight',
+        methods: {
+            openSlideR: () => {
+                bus.$emit('slideOpenR')
+            }
+        }
     }
 </script>
 

@@ -1,6 +1,6 @@
 <template>
         <div class="middle-sib middle-left">
-                        <div class="btn-wrap btn-left">
+                        <div @click="openSlideL" class="btn-wrap btn-left">
                             <div class="dots">
                                 <span class="dot dot-one"></span>
                                 <span class="dot dot-two"></span>
@@ -13,8 +13,17 @@
 
 
 <script>
+	
+	import { bus } from '../../main.js'
+
     export default {
-        name: 'MainMidLeft'
+        name: 'MainMidLeft',
+        methods: {
+        	openSlideL() {
+        		bus.$emit('slideOpenL')
+        	}
+        }
+
     }
 </script>
 

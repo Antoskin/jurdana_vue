@@ -16,12 +16,33 @@
     import RightSlideTop from './SlideRightTop.vue'
     import RightSlideMiddle from './SlideRightMiddle.vue'
 
+    import { TweenLite } from 'gsap'
+
+    import {bus} from '../../../main.js'
+
+
+
     export default {
         name: 'SlideRight',
         components: {
             RightSlideTop,
             RightSlideMiddle
+        },
+        created() {
+            bus.$on(`slideOpenR`, () => {
+                openRightSlide()
+            })
         }
+    }
+
+
+    const openRightSlide = () => {
+        let tl = TweenLite
+        tl.to(`.right-slider`, .5, {'right': 0})
+        tl.fromTo(`.r-s-close img`, .5, {'margin': 0}, { 'margin': '20px 0' }).delay(2)
+        tl.fromTo(`.r-s-close span`, 5, {'opacity': 0}, { 'opacity': 1 }).delay(2.5)
+        tl.to(`.right-slider`, .5, {'height': '100%'}).delay(.7)
+        tl.fromTo(`.right-slide-mid, .right-slide-top, .right-slide-bot`, .5, { opacity:0, 'visibility':'hidden' }, { opacity: 1, 'visibility':'visible' },.5  ).delay(1.5)
     }
 </script>
 

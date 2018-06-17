@@ -1,7 +1,7 @@
 <template>
         <div class="right-slide-top">
                     <div class="slide-dots-back"></div>
-                    <div class="r-s-close">
+                    <div @click="closeRightSlide" class="r-s-close">
                         <img class="m-c" width="15" src="../../../assets/arow 1.svg" alt="">
                         <span class="m-c">CLOSE</span>
                         <img class="m-c" width="15" src="../../../assets/arow 2.svg" alt="">
@@ -11,8 +11,22 @@
 </template>
 
 <script>
+    import {TweenLite} from 'gsap'
     export default {
-        name: 'RightSlideTop'
+        name: 'RightSlideTop',
+        methods: {
+            closeRightSlide: () => {
+                closeRightSlide()
+            }
+        }
+    }
+
+    const closeRightSlide = () => {
+        let tl = TweenLite
+        tl.fromTo(`.right-slide-mid, .right-slide-top, .right-slide-bot`, .5, { opacity:1, 'visibility':'visible' }, { opacity: 0, 'visibility':'hidden' }, .5  )
+        tl.to(`.right-slider`, .5, {'height': '60%'}).delay(.7)
+        tl.to(`.right-slider`, .5, {'right': '-95%'}).delay(1.5)
+        tl.to(`.r-s-close span`, .5, { 'opacity': 0 })
     }
 </script>
 
